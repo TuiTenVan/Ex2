@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Exe2</string>
+    <string-array name="uni">
+        <item>PTIT</item>
+        <item>KMA</item>
+        <item>HUST</item>
+        <item>HANU</item>
+        <item>TMU</item>
+    </string-array>
+    <string-array name="tinh">
+        <item>+</item>
+        <item>-</item>
+        <item>*</item>
+        <item>/</item>
+    </string-array>
+    <string-array name="tpho">
+        <item>Hai Duong</item>
+        <item>Ha Noi</item>
+        <item>Vinh Phuc</item>
+        <item>Hoa Binh</item>
+        <item>/</item>
+    </string-array>
+</resources>
