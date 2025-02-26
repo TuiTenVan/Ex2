@@ -2,7 +2,9 @@ package com.example.exe2;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ public class Main1 extends AppCompatActivity {
 
     ListView listView;
     AutoCompleteTextView autoTp;
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class Main1 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.main2);
         initGUI();
+        registerForContextMenu(img);
         spTinh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -102,30 +107,50 @@ public class Main1 extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.mFile:
-//                Toast.makeText(this, "Selected File", Toast.LENGTH_SHORT).show();
-//                return true;
-//
-//            case R.id.mEmail:
-//                Toast.makeText(this, "Selected Email", Toast.LENGTH_SHORT).show();
-//                return true;
-//
-//            case R.id.mPhone:
-//                Toast.makeText(this, "Selected Phone", Toast.LENGTH_SHORT).show();
-//                return true;
-//
-//            case R.id.mExit:
-//                finish(); // Thoát ứng dụng một cách an toàn
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
 
+        if (itemId == R.id.mFile) {
+            Toast.makeText(this, "Selected File", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (itemId == R.id.mEmail) {
+            Toast.makeText(this, "Selected Email", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (itemId == R.id.mPhone) {
+            Toast.makeText(this, "Selected Phone", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (itemId == R.id.mExit) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.image_menu, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.mRed) {
+            txtTime.setBackgroundColor(Color.RED);
+            return true;
+        } else if (itemId == R.id.mYellow) {
+            txtTime.setBackgroundColor(Color.YELLOW);
+            return true;
+        } else if (itemId == R.id.mBlue) {
+            txtTime.setBackgroundColor(Color.BLUE);
+            return true;
+        }
+
+        return super.onContextItemSelected(item);
+    }
 
 
     private String tinh(String nn1, String nn2, String p){
@@ -169,5 +194,6 @@ public class Main1 extends AppCompatActivity {
         txtDate = findViewById(R.id.txt4);
         listView = findViewById(R.id.listItem);
         autoTp = findViewById(R.id.autoTP);
+        img = findViewById(R.id.imageView);
     }
 }
